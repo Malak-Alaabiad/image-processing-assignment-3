@@ -1,13 +1,13 @@
 # Image Processing – Assignment 3
 
-Two image-processing experiments in Python, each available as a standalone script and as a tab in a small Tkinter GUI:
+Two image-processing experiments in Python, each available as a standalone script and as a page in a Tkinter GUI:
 
 1. **Frequency-domain filtering**: Gaussian low-pass and high-pass filters applied via the 2D DFT.
 2. **Noise & restoration filters**: Gaussian and salt-and-pepper noise, removed with an adaptive median filter and classic spatial filters, compared by PSNR.
 
 Both experiments work on full **RGB** images by processing each color channel separately.
 
-![GUI](docs/gui.png)
+![GUI – Noise & filters page](docs/gui-noise.png)
 
 ## Getting started
 
@@ -31,7 +31,7 @@ pip install numpy matplotlib pillow opencv-python numba
 | Command | What it does |
 |---|---|
 | `python gui.py` | Opens the interactive GUI with one tab per experiment |
-| `python experiment-1.py` | Runs Experiment 1 and saves `outputs/experiment1_result.png` |
+| `python experiment-1.py` | Runs Experiment 1 and saves `outputs/exp1_results.png` |
 | `python experiment-2.py` | Runs Experiment 2, prints a PSNR summary and saves `outputs/exp2_results.png` |
 
 > The first run of Experiment 2 takes a few extra seconds while Numba compiles the adaptive median filter. Later runs use the cache.
@@ -46,13 +46,13 @@ pip install numpy matplotlib pillow opencv-python numba
 4. Applies the inverse DFT to return to the spatial domain.
 5. Plots the results in a 2×4 grid.
 
-![Experiment 1 results](outputs/experiment1_result.png)
+![Experiment 1 results](outputs/exp1_results.png)
 
 The low-pass result is a smooth, blurred image. The high-pass result keeps only edges and fine detail.
 
 ## Experiment 2: Noise & restoration filters
 
-`experiment-2.py` processes `images/Lenna.png` in two parts.
+`experiment-2.py` processes `images/lenna.png` in two parts.
 
 **Part A: Gaussian noise + adaptive median filter**
 - Adds Gaussian noise (mean 0, σ = 20) to each channel.
@@ -90,14 +90,20 @@ The low-pass result is a smooth, blurred image. The high-pass result keeps only 
 
 ## GUI
 
-`gui.py` puts both experiments in one window with live controls.
+`gui.py` puts both experiments in one dark-themed window. Switch between them with the buttons in the top-right corner.
 
-| Tab | Controls | Output |
+| Page | Controls | Output |
 |---|---|---|
-| **Experiment 1 – Frequency filtering** | Load image, cutoff `D0` slider (1–150) | The full 2×4 grid for the chosen `D0` |
-| **Experiment 2 – Noise & filters** | Load image, noise type, Gaussian σ (1–100), salt & pepper amount (1–90%), filter, kernel size (3/5/7/9) | Original, noisy and filtered images with PSNR, plus the estimated noise density |
+| **Frequency filtering** | Load image, cutoff `D0` slider (1–150) | The full 2×4 grid, redrawn live as you drag the slider |
+| **Noise & filters** | Load image, noise type and strength (Gaussian σ 1–100 or salt & pepper amount 1–90%), filter, kernel size (3×3 to 9×9), **Apply** | Original, noisy and filtered images, plus tiles for noisy PSNR, filtered PSNR, improvement and noise density |
 
-In the Experiment 2 tab, choosing a filter also selects a default noise type: salt & pepper for the adaptive median, Gaussian for the others. You can change it before pressing **Apply**.
+- Choosing a filter also picks a matching noise type: salt & pepper for the adaptive median, Gaussian for the others. You can change it before pressing **Apply**.
+- Kernel size is disabled for the adaptive median, which picks its own window size.
+- **Save figure…** saves the current view as an image, by default into `outputs/`.
+- Shortcuts: `Ctrl+O` load image, `Ctrl+S` save figure, `Enter` apply.
+- No extra packages are needed. The theme is built with Tkinter's own `ttk` styles.
+
+![GUI – Frequency filtering page](docs/gui-frequency.png)
 
 ## Project structure
 
@@ -108,10 +114,11 @@ In the Experiment 2 tab, choosing a filter also selects a default noise type: sa
 ├── experiment-2.py         # Noise & restoration filters script
 ├── images/
 │   ├── cameraman.png       # Input image for Experiment 1
-│   └── Lenna.png           # Input image for Experiment 2
+│   └── lenna.png           # Input image for Experiment 2
 ├── outputs/
-│   ├── experiment1_result.png  # Output of Experiment 1
-│   └── exp2_results.png        # Output of Experiment 2
+│   ├── exp1_results.png    # Output of Experiment 1
+│   └── exp2_results.png    # Output of Experiment 2
 └── docs/
-    └── gui.png             # GUI screenshot for this README
+    ├── gui-frequency.png   # GUI screenshots for this README
+    └── gui-noise.png
 ```

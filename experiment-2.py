@@ -6,7 +6,7 @@ import numpy as np
 from numba import njit
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-IMAGE_PATH = os.path.join(BASE_DIR, "images", "Lenna.png")
+IMAGE_PATH = os.path.join(BASE_DIR, "images", "lenna.png")
 OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
 
 

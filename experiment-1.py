@@ -60,7 +60,7 @@ for ax, (im, t, kwargs) in zip(axs.ravel(), items):
 plt.tight_layout()
 out_dir = script_dir / "outputs"
 out_dir.mkdir(exist_ok=True)
-out_path = out_dir / "experiment1_result.png"
+out_path = out_dir / "exp1_results.png"
 plt.savefig(out_path, dpi=150, bbox_inches="tight")
 print(f"Results successfully saved to: {out_path.relative_to(script_dir)}")
 
