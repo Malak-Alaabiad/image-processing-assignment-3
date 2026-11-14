@@ -1,0 +1,31 @@
+# Bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE and Editor configs (prevents leaking personal paths)
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Local tool configs with personal paths
+pyrefly.toml
+pyproject.toml
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# OS-specific files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+[Dd]esktop.ini
+.DS_Store
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
